@@ -50,8 +50,8 @@ def main():
         if os.path.isfile(abspath):
             continue
         data = s.get_story_blob(snap['media_id'],
-                                base64.b64decode(snap['media_key']),
-                                base64.b64decode(snap['media_iv']))
+                                snap['media_key'],
+                                snap['media_iv'])
         if data is None:
             continue
         with open(abspath, 'wb') as f:
