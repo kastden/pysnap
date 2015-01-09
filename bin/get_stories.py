@@ -17,7 +17,6 @@ from __future__ import print_function
 import os.path
 import sys
 from getpass import getpass
-import base64
 
 from docopt import docopt
 
