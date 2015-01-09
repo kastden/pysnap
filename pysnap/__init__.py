@@ -3,6 +3,7 @@
 import json
 import os.path
 from time import time
+from base64 import b64decode
 
 from pysnap.utils import (encrypt, decrypt, decrypt_story,
                           make_media_id, request)
@@ -176,8 +177,9 @@ class Snapchat(object):
         """
         r = self._request('story_blob', {'story_id': story_id},
                           raise_for_status=False, req_type='get')
-        data = decrypt_story(r.content, story_key.decode('base64'),
-                             story_iv.decode('base64'))
+        
+        data = decrypt_story(r.content, b64decode(story_key),
+                             b64decode(story_iv))
         if any((is_image(data), is_video(data), is_zip(data))):
             return data
         return None
